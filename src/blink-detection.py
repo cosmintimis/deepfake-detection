@@ -39,7 +39,6 @@ def get_blink_ratio(eye_points, facial_landmarks):
 
 base_path = os.path.dirname(__file__)  # Directory of the current script
 sample_video_path = os.path.join(base_path, r'sample-dataset\original_sequences\youtube\c23\videos\585.mp4')
-print(sample_video_path)
 # in case of a video
 cap = cv2.VideoCapture(sample_video_path)
 
@@ -56,6 +55,7 @@ predictor = dlib.shape_predictor(trained_model_path)
 left_eye_landmarks  = [36, 37, 38, 39, 40, 41]
 right_eye_landmarks = [42, 43, 44, 45, 46, 47]
 
+count_blinks = 0
 while True:
     #capturing frame
     retval, frame = cap.read()
@@ -87,6 +87,7 @@ while True:
             #Blink detected! Do Something!
             cv2.putText(frame,"BLINKING",(10,50), cv2.FONT_HERSHEY_SIMPLEX,
                         2,(255,255,255),2,cv2.LINE_AA)
+            count_blinks += 1
 
     cv2.imshow('BlinkDetector', frame)
     key = cv2.waitKey(1)
@@ -96,3 +97,6 @@ while True:
 #releasing the VideoCapture object
 cap.release()
 cv2.destroyAllWindows()
+
+# Printing the number of blinks
+print(f"Number of blinks: {count_blinks}")
