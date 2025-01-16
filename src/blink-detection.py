@@ -2,6 +2,7 @@
 import cv2
 import dlib
 import math
+import os
 BLINK_RATIO_THRESHOLD = 5.7
 
 #-----Step 5: Getting to know blink ratio
@@ -36,8 +37,11 @@ def get_blink_ratio(eye_points, facial_landmarks):
 # #livestream from the webcam 
 # cap = cv2.VideoCapture(0)
 
+base_path = os.path.dirname(__file__)  # Directory of the current script
+sample_video_path = os.path.join(base_path, r'sample-dataset\original_sequences\youtube\c23\videos\585.mp4')
+print(sample_video_path)
 # in case of a video
-cap = cv2.VideoCapture(r"D:\facultate\YEAR3\sem1\cercetare\deepfake-detection\src\sample-dataset\original_sequences\youtube\c23\videos\585.mp4")
+cap = cv2.VideoCapture(sample_video_path)
 
 #name of the display window in OpenCV
 cv2.namedWindow('BlinkDetector')
@@ -46,7 +50,8 @@ cv2.namedWindow('BlinkDetector')
 detector = dlib.get_frontal_face_detector()
 
 #-----Step 4: Detecting Eyes using landmarks in dlib-----
-predictor = dlib.shape_predictor(r"D:\facultate\YEAR3\sem1\cercetare\deepfake-detection\src\shape_predictor_68_face_landmarks.dat")
+trained_model_path = os.path.join(base_path, 'shape_predictor_68_face_landmarks.dat')
+predictor = dlib.shape_predictor(trained_model_path)
 #these landmarks are based on the image above 
 left_eye_landmarks  = [36, 37, 38, 39, 40, 41]
 right_eye_landmarks = [42, 43, 44, 45, 46, 47]
