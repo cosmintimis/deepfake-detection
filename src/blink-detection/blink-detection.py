@@ -38,7 +38,7 @@ def get_blink_ratio(eye_points, facial_landmarks):
 # cap = cv2.VideoCapture(0)
 
 base_path = os.path.dirname(__file__)  # Directory of the current script
-sample_video_path = os.path.join(base_path, r'sample-dataset\original_sequences\youtube\c23\videos\585.mp4')
+sample_video_path = os.path.join(base_path, r'..\sample-dataset\original_sequences\youtube\c23\videos\585.mp4')
 # in case of a video
 cap = cv2.VideoCapture(sample_video_path)
 
